@@ -69,8 +69,7 @@ class IdeaTile extends PureComponent {
 }
 
 IdeaTile.propTypes = {
-    idea: PropTypes.string,
-    key: PropTypes.string,
+    idea: PropTypes.object,
     deleteIdea: PropTypes.func,
     updatedIdea: PropTypes.func
 }

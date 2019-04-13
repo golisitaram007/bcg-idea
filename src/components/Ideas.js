@@ -43,7 +43,7 @@ Ideas.propTypes = {
     ideas: PropTypes.array,
     sortBy: PropTypes.string,
     notification: PropTypes.string,
-    showForm: PropTypes.string,
+    showForm: PropTypes.bool,
     addIdea: PropTypes.func, 
     updateIdea: PropTypes.func,
     deleteIdea: PropTypes.func,
