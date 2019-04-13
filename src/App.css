@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #61dafb;
+    background: #282c34; 
+}
+.App { text-align: center }
+.container{ width: 90%; margin: 0 auto; }
+.navbar { border-bottom: 1px solid #ccc }
+.ideaActions {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    background: #434343;
+}
+.btn {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.btn1 { background: #4af0f0 }
+.btn2 { background: #007900; color: #ccc }
+.btn3 { background: #a61700; color: #ccc; }
+.notification {
+    border-radius: 5px;
+    background: black;
+    padding: 5px 10px;
+    min-width: 400px;
+}
+.ideas {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px;
+}
+.idea {
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+}
+.ideaStyle {
+    background: #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+.ideaStyle h4 {
+    margin: 0;
+    background: #535353;
+    color: #ccc;
+    padding: 2px 0;
+}
+.ideaStyle:hover .actions {
+    display: flex;
+    justify-content: space-between;
+}
+.ideaStyle .actions { display: none; position: absolute; bottom: 0; right: 0}
+.ideaStyle .actions > * { cursor: pointer; }
+.modal-header{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+.form{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+    background: #000;
+}
+.form-fields{
+    display: flex;
+    flex-grow: 3;
+}
+.form-group{ margin: 5px 15px; display: flex; flex-grow: 2 }
+.form-group label {
+    flex-basis: 140px;
+    padding: 3px;
+}
+.form-group label + * { flex-basis: 100% }
+.inputEle {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 3px;
+    color: #ccc;
+}
+.form-actions { display: flex }
+.form-actions > * { flex-grow: 1 }
+.description{
+    word-break: break-all;
+    overflow-y: auto;
+    max-height: 100%;
+    text-overflow: ellipsis;
+}
+.btn:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+textarea.textEditable {
+    height: 100%;
+}
+.textEditable {
+    background: transparent;
+    color: inherit;
+    outline: none;
+    border: 1px solid lightgray
+}
+
+
+
+.textEditable::-webkit-scrollbar {
+    width: 0.5em;
+}
+ 
+.textEditable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.textEditable::-webkit-scrollbar-thumb {
+  background-color: coral;
+  outline: 1px solid slategrey;
+  border-radius: 10px;
+}
+
+
+@keyframes blink {
+    0% { color: red }
+    100% { color: black }
+}
+@-webkit-keyframes blink {
+    0% { color: red }
+    100% { color: black }
+}
+
+.blink {
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
+}
