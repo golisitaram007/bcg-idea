@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const IdeaActions = (props) => {
   const { notification } = props;
   return (
     <div className="ideaActions">
-        <button className="btn btn1" onClick={() => props.newIdeaForm()}>New Idea</button>
+        <button className="btn btn1" 
+                onClick={() => props.newIdeaForm()}>New Idea</button>
         {
           notification ? <div className="notification blink">{ notification }</div> : <div></div>
         }
@@ -18,6 +20,11 @@ const IdeaActions = (props) => {
         </div>
     </div>
   )
+}
+
+IdeaActions.propTypes = {
+  newIdea: PropTypes.func,
+  closeForm: PropTypes.func
 }
 
 export default IdeaActions;

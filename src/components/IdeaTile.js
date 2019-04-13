@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class IdeaTile extends PureComponent {
 
@@ -65,6 +66,12 @@ class IdeaTile extends PureComponent {
             
         )
     }
+}
+
+IdeaTile.propTypes = {
+    idea: PropTypes.object,
+    deleteIdea: PropTypes.func,
+    updatedIdea: PropTypes.func
 }
 
 export default IdeaTile;

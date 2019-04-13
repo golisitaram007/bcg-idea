@@ -1,6 +1,7 @@
 import React, {
     PureComponent
-} from 'react'
+} from 'react';
+import PropTypes from 'prop-types';
 
 class IdeaForm extends PureComponent {
 
@@ -49,6 +50,14 @@ class IdeaForm extends PureComponent {
             </div>
         )
     }
+}
+
+
+IdeaForm.propTypes = {
+    notification: PropTypes.string,
+    sort: PropTypes.string,
+    sortBy: PropTypes.func,
+    newIdeaForm: PropTypes.func
 }
 
 export default IdeaForm;

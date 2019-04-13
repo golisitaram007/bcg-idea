@@ -87,8 +87,16 @@ class Ideas extends PureComponent {
     render() {
         return (
         <div className="container">
-            <IdeaActions notification={this.state.notification} sort={this.state.sortBy} sortBy={(e) => this.handlesortBy(e)} newIdeaForm={() => this.newIdeaForm()} />
-            { this.state.showForm ? <IdeaForm newIdea={(idea) => this.handleFormUpdate(idea)} closeForm={() => this.closeForm()}>Form Here</IdeaForm> : null }
+            <IdeaActions notification={this.state.notification} 
+                         sort={this.state.sortBy} 
+                         sortBy={(e) => this.handlesortBy(e)} 
+                         newIdeaForm={() => this.newIdeaForm()} />
+            { 
+                this.state.showForm 
+                    ? <IdeaForm newIdea={(idea) => this.handleFormUpdate(idea)} 
+                                closeForm={() => this.closeForm()} />
+                    : null 
+            }
             <div className="ideas">
                 { 
                     this.state.ideas.length ?
