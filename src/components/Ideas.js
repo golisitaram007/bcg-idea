@@ -1,102 +1,34 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import IdeaActions from './IdeaActions';
 import IdeaTile from './IdeaTile';
 import IdeaForm from './IdeaForm';
-import Data from '../utils/dataService';
+import PropTypes from 'prop-types';
 
-class Ideas extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            form: {},
-            ideas: [],
-            showForm: false,
-            notification: '',
-            sortBy: 'id'
-        }
-        this.data = new Data();
-    }
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addIdea, updateIdea, deleteIdea, sortIdeas, toggleForm } from '../store/actions';
 
-    handleFormUpdate = f => {
-        this.setState({
-            form: { ...f, ...this.data.getNewIdea() }
-        }, () => {
-            this.closeForm();
-            this.setIdeas([...this.data.getAllIdeas(), this.state.form]);
-            this.data.addNewIdea(this.state.form);
-            this.notify("Successfully Idea Created");
-        })
-    }
-
-    setIdeas(ideas) {
-        this.setState({ ideas })
-    }
-
-    notify(msg) {
-        this.setState({
-            notification: msg
-        });
-        setTimeout(() => {
-            this.setState({
-                notification: ''
-            })
-        }, 3000)
-    }
-
-    componentDidMount() {
-        this.setIdeas(this.data.getAllIdeas());
-    }
-    
-    newIdeaForm() {
-        this.setState({
-            showForm: true
-        })
-    }
-
-    closeForm() {
-        this.setState({
-            showForm: false
-        })
-    }
-
-    deleteIdea(idea) {
-        this.data.deleteIdea(idea);
-        this.setIdeas(this.data.getAllIdeas());
-        this.notify("Idea Deleted");
-    }
-
-    updatedIdea(idea) {
-        idea.title && this.data.updateIdea(idea);
-        this.setIdeas(this.data.getAllIdeas());
-        this.notify("Successfully Idea Updated");
-    }
-    sortIdeas(key) {
-        return this.data
-                   .getAllIdeas()
-                   .sort((a, b) => (a[key] > b[key]) ? 1 : -1 );
-        
-    }
-    handlesortBy(key) {
-        this.setState({
-            sortBy: key
-        }, () => {
-            this.setIdeas(this.sortIdeas(key));
-        })
-    }
-
-    render() {
-        return (
+const Ideas = (props) => {
+    return (
         <div className="container">
-            <IdeaActions notification={this.state.notification} sort={this.state.sortBy} sortBy={(e) => this.handlesortBy(e)} newIdeaForm={() => this.newIdeaForm()} />
-            { this.state.showForm ? <IdeaForm newIdea={(idea) => this.handleFormUpdate(idea)} closeForm={() => this.closeForm()}>Form Here</IdeaForm> : null }
+            <IdeaActions notification={props.notification} 
+                         sort={props.sortBy} 
+                         sortBy={(key) => props.sortIdeas(key)} 
+                         newIdeaForm={(e) => props.toggleForm(e)} />
+            { 
+                props.showForm ? 
+                    <IdeaForm newIdea={(idea) => props.addIdea(idea)} 
+                              closeForm={() => props.toggleForm(false)} />
+                              : null 
+            }
             <div className="ideas">
                 { 
-                    this.state.ideas.length ?
-                        this.state.ideas.map(idea => {
+                    props.ideas.length ?
+                    props.ideas.map((idea, ind) => {
                             return <IdeaTile idea={ idea } 
-                                             key={ idea.id } 
-                                             deleteIdea={(idea) => this.deleteIdea(idea)}
-                                             updatedIdea={(idea) => this.updatedIdea(idea)}/>
+                                             key={ ind } 
+                                             deleteIdea={(idea) => props.deleteIdea(idea)}
+                                             updatedIdea={(idea) => props.updateIdea(idea)}/>
                         })
                         :
                         <div>No Ideas Created yet.</div>
@@ -104,8 +36,29 @@ class Ideas extends PureComponent {
                 }
             </div>
         </div>
-        )
-    }
+    )
 }
 
-export default Ideas;
+Ideas.propTypes = {
+    ideas: PropTypes.array,
+    sortBy: PropTypes.string,
+    notification: PropTypes.string,
+    showForm: PropTypes.string,
+    addIdea: PropTypes.func, 
+    updateIdea: PropTypes.func,
+    deleteIdea: PropTypes.func,
+    sortIdeas: PropTypes.func,
+    toggleForm: PropTypes.func
+}
+
+
+const mapStateToProps = (state) => ({
+    ideas: state.ideas,
+    sortBy: state.sortBy,
+    notification: state.notification,
+    showForm: state.showForm
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({addIdea, updateIdea, deleteIdea, sortIdeas, toggleForm}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Ideas);

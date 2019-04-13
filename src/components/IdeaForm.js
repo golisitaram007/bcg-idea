@@ -1,6 +1,8 @@
 import React, {
     PureComponent
-} from 'react'
+} from 'react';
+import PropTypes from 'prop-types';
+import * as moment from 'moment';
 
 class IdeaForm extends PureComponent {
 
@@ -18,7 +20,10 @@ class IdeaForm extends PureComponent {
         })
     }
 
-    handleSubmit = () => { this.props.newIdea(this.state) }
+    handleSubmit = () => { 
+        const created_date = moment().format("DD/MM/YYYY HH:mm:ss");
+        this.props.newIdea({...this.state, created_date}) 
+    }
 
     render() {
         return (
@@ -49,6 +54,11 @@ class IdeaForm extends PureComponent {
             </div>
         )
     }
+}
+
+IdeaForm.propTypes = {
+    newIdea: PropTypes.func,
+    closeForm: PropTypes.func 
 }
 
 export default IdeaForm;

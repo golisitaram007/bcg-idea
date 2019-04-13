@@ -1,0 +1,22 @@
+{
+  "ideas": [
+    {
+      "title": "Idea 1",
+      "body": "Create React App",
+      "created_date": "13/04/2019 19:54:32",
+      "id": 1
+    },
+    {
+      "title": "Idea 2",
+      "body": "Using Redux",
+      "created_date": "13/04/2019 19:54:59",
+      "id": 2
+    },
+    {
+      "title": "Idea 3",
+      "body": "No thoughts",
+      "created_date": "13/04/2019 19:55:15",
+      "id": 3
+    }
+  ]
+}
